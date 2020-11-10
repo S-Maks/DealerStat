@@ -6,21 +6,21 @@ import java.util.Objects;
 
 @Entity
 @IdClass(CommentPK.class)
-@Table(name = "comment", schema = "public")
+@Table(name = "comment")
 public class Comment {
-    private int id;
+    private Integer id;
     private String message;
-    private int idUser;
+    private Integer idUser;
     private String approved;
     private Date createdAt;
 
     @Id
     @Column(name = "id", nullable = false)
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -36,11 +36,11 @@ public class Comment {
 
     @Id
     @Column(name = "id_user", nullable = false)
-    public int getIdUser() {
+    public Integer getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(int idUser) {
+    public void setIdUser(Integer idUser) {
         this.idUser = idUser;
     }
 
@@ -65,13 +65,24 @@ public class Comment {
     }
 
     @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", message='" + message + '\'' +
+                ", idUser=" + idUser +
+                ", approved='" + approved + '\'' +
+                ", createdAt=" + createdAt +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Comment comment = (Comment) o;
-        return id == comment.id &&
-                idUser == comment.idUser &&
+        return Objects.equals(id, comment.id) &&
                 Objects.equals(message, comment.message) &&
+                Objects.equals(idUser, comment.idUser) &&
                 Objects.equals(approved, comment.approved) &&
                 Objects.equals(createdAt, comment.createdAt);
     }

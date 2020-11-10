@@ -6,26 +6,26 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class CommentPK implements Serializable {
-    private int id;
-    private int idUser;
+    private Integer id;
+    private Integer idUser;
 
     @Column(name = "id", nullable = false)
     @Id
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
     @Column(name = "id_user", nullable = false)
     @Id
-    public int getIdUser() {
+    public Integer getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(int idUser) {
+    public void setIdUser(Integer idUser) {
         this.idUser = idUser;
     }
 
@@ -34,8 +34,8 @@ public class CommentPK implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CommentPK commentPK = (CommentPK) o;
-        return id == commentPK.id &&
-                idUser == commentPK.idUser;
+        return Objects.equals(id, commentPK.id) &&
+                Objects.equals(idUser, commentPK.idUser);
     }
 
     @Override

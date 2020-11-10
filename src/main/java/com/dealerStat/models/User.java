@@ -2,12 +2,13 @@ package com.dealerStat.models;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.Objects;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user", schema = "public", catalog = "DealerStat")
 public class User {
-    private int id;
+    private Integer id;
     private String firstName;
     private String lastName;
     private String password;
@@ -15,13 +16,27 @@ public class User {
     private Date createdAt;
     private String role;
 
+
+    public User() {
+    }
+
+    public User(String firstName, String lastName, String password, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.email = email;
+        this.createdAt = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+        this.role = "TRAIDER";
+    }
+
     @Id
     @Column(name = "id", nullable = false)
-    public int getId() {
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -90,7 +105,7 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id &&
+        return Objects.equals(id, user.id) &&
                 Objects.equals(firstName, user.firstName) &&
                 Objects.equals(lastName, user.lastName) &&
                 Objects.equals(password, user.password) &&
@@ -102,5 +117,18 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(id, firstName, lastName, password, email, createdAt, role);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", createdAt=" + createdAt +
+                ", role='" + role + '\'' +
+                '}';
     }
 }

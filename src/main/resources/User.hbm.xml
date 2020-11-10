@@ -5,8 +5,9 @@
 <hibernate-mapping>
 
     <class name="com.dealerStat.models.User" table="user" schema="public" catalog="DealerStat">
-        <id name="id" type = "java.lang.Integer" column = "id">
+        <id name="id">
             <column name="id" sql-type="integer"/>
+            <generator class="identity"/>
         </id>
         <property name="firstName">
             <column name="first_name" sql-type="varchar(50)" length="50"/>
