@@ -1,31 +1,31 @@
-CREATE TABLE "user"(
-  id SERIAL primary key not null,
-  first_name varchar(50) not null,
-  last_name varchar(50) not null,
-  password varchar(100) not null,
-  email varchar(30) not null,
-  created_at date not null ,
-  role varchar(20) not null
+CREATE TABLE userAccount
+(
+    id         bigint primary key not null,
+    first_name varchar(255)       not null,
+    last_name  varchar(255)       not null,
+    hash_password   varchar(255)       not null,
+    email      varchar(255)       not null,
+    created_at date               not null,
+    role       varchar(255)       not null
+);
+ALTER TABLE userAccount OWNER TO postgres;
+
+CREATE SEQUENCE user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+ALTER TABLE userAccount OWNER TO postgres;
+ALTER SEQUENCE user_id_seq OWNED BY userAccount.id;
+
+CREATE TABLE public.trader (
+ abstract_user_id bigint NOT NULL
 );
 
-CREATE TABLE comment(
-  id SERIAL not null,
-  message VARCHAR(2000) not null ,
-  id_user int not null,
-  approved VARCHAR(10) not null,
-  created_at date not null,
-  PRIMARY KEY (id,id_user),
-  foreign key (id_user) references "user"(id)ON DELETE CASCADE ON UPDATE CASCADE
-);
+insert into userAccount(id, first_name, last_name, hash_password, email, created_at, role)
+VALUES (1,'Maks', 'Titok', 'admin', 'admin', '15-11-2020','ROLE_ADMIN');
 
-
-insert into "user"(first_name, last_name, password, email, created_at, role)
-VALUES ('Maks','Titok','qwerty007','maks.titok@gmail.com','09-11-2020','ADMIN');
-
-insert into "user"(first_name, last_name, password, email, created_at, role)
-VALUES ('Misha','Pashkevich','newQwerty','miha2001@gmail.com','10-11-2020','ADMIN');
-
-insert into comment(message, id_user, approved, created_at)
- VALUES ('Hello world',1,'APPROVED','10-11-2020');
---drop table comment,userFix;
---drop schema myapp CASCADE ;
+select email, hash_password
+from userAccount

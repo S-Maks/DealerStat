@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title th:utext="#{addtrader.title}"></title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/icon.ico}"  />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/fonts.css}" />
+
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="navbar">
+            <div class="local">
+                <a href="#en" th:href="@{?locale=en}">En</a> |
+                <a href="#ru" th:href="@{?locale=ru}">Ru</a>
+            </div>
+            <ul><li><a class="a-link-margin" th:text="#{logout.title}" th:href="@{/logout}"></a></li></ul>
+        </div>
+    </div>
+</header>
+
+<div class="text-center" style="margin-bottom: 3%;">
+    <h1 class="c-text-h1 margin-five" th:utext="#{addtrader.title}"></h1>
+</div>
+<form class="box" action="#" th:action="@{/admin/addTrader}" th:object="${trader}" method="post">
+    <div class="c-label box c-box-input">
+
+        <label for="firstName" th:utext="#{firstName.title}"></label>
+        <input type="text" th:field="*{firstName}" id="firstName" name="firstName" />
+        <label th:utext="#{lastName.title}"></label>
+        <input type="text" th:field="*{lastName}" id="lastName" name="lastName" />
+        <label th:utext="#{patronymicName.title}"></label>
+        <input type="text" th:field="*{patronymicName}" id="patronymicName" name="patronymicName"/>
+        <label th:utext="#{userName.title} + ':'"></label>
+        <input type="text" th:field="*{userName}" id="userName" name="userName" />
+        <label th:utext="#{userPassword.title} + ':'"></label>
+        <input type="password" th:field="*{userPassword}" id="userPassword" name="userPassword" />
+        <input type = "submit" class="login-button" th:value="' ' + #{add.title} + ' '" />
+    </div>
+</form>
+</body>
+</html>

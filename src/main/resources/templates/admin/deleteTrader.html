@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title th:utext="#{deletetrader.title}"></title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/icon.ico}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/fonts.css}"/>
+    <meta charset="UTF-8" />
+</head>
+
+<body>
+<header>
+    <div class="container">
+        <div class="navbar">
+            <div class="local">
+                <a href="#en" th:href="@{?locale=en}">En</a> |
+                <a href="#ru" th:href="@{?locale=ru}">Ru</a>
+            </div>
+            <ul><li><a class="a-link-margin" th:text="#{logout.title}" th:href="@{/logout}"></a></li></ul>
+        </div>
+    </div>
+</header>
+<div class="text-center">
+    <h1 class="c-text-h1 margin-five" th:utext="#{traders.title}"></h1>
+    <div class="table-container">
+
+        <table>
+            <thead>
+            <tr>
+                <th th:utext="#{id.title}"></th>
+                <th th:utext="#{firstName.title}"></th>
+                <th th:utext="#{lastName.title}"></th>
+                <th th:utext="#{patronymicName.title}"></th>
+                <th th:utext="#{login.name}"></th>
+                <th th:utext="#{password.name}"></th>
+                <th style="text-align: center;" th:utext="#{delete.title}"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="trader: ${traders}">
+                <td><a class="a-link-no-margin" th:href="'/admin/editTrader?id=' + ${trader.id}"  th:text="${trader.id}"></a></td>
+                <td th:utext="${trader.firstName}"></td>
+                <td th:utext="${trader.lastName}"></td>
+                <td th:utext="${trader.patronymicName}"></td>
+                <td th:utext="${trader.userName}"></td>
+                <td th:utext="${trader.userPassword}"></td>
+                <td class="td-x-container"><a class="a-link-no-margin red-x" th:href="'/admin/deleteTrader?id=' + ${trader.id}">x</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
